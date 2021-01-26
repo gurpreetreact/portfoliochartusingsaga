@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import fetchStocks from "./actions/postActions";
+
+import BuySell from "./userInterface/buySell";
+import Donut from "./userInterface/donut";
+import GeneralQuantity from "./userInterface/generalQuantity";
+import MarketValue from "./userInterface/marketValue";
+import ShowPrice from "./userInterface/showPrice";
+import UnrealizedPL from "./userInterface/unrealizedPL";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode>
+      {/* <FetchSuccessful /> */}
+      <div className="parentFormat">
+        <div>
+          <span className="index">
+            <span className="padding" style={{ padding: "0px" }}>
+              <ShowPrice />
+            </span>
+            <span className="padding">
+              <GeneralQuantity />
+            </span>
+            <span className="padding">
+              <MarketValue />
+            </span>
+            <span className="padding">
+              <UnrealizedPL />
+            </span>
+            <span className="padding">
+              <BuySell />
+            </span>
+          </span>
+        </div>
+        <div style={{ width: "110%" }}>
+          <span className="donut">
+            <Donut />
+          </span>
+        </div>
+      </div>
+    </React.StrictMode>
   );
 }
 
