@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import "./css/showPrice.css";
 import threelines from "../assets/threelines.png";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function ShowPrice(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
-
   if (props.stocks !== undefined) {
     stock = props.stocks.map((data) => (
       <div className="main1" key={data.scrip}>
@@ -37,8 +36,12 @@ function ShowPrice(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(ShowPrice);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPrice);

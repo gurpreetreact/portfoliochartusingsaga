@@ -4,11 +4,11 @@ import at from "../assets/at.png";
 import databases from "../assets/databases.png";
 import dollar from "../assets/dollar.png";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function GeneralQuantity(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
 
@@ -49,8 +49,12 @@ function GeneralQuantity(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(GeneralQuantity);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GeneralQuantity);

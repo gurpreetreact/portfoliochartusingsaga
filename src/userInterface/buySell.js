@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./css/buySell.css";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function BuySell(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
 
@@ -23,8 +23,12 @@ function BuySell(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(BuySell);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BuySell);

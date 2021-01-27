@@ -1,15 +1,17 @@
 import stockReducer from "./reducers/stockReducer";
 import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./sagas/rootSaga";
 
-const initialState = {};
-
-const middleware = [thunk];
+const initialState = {}
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   stockReducer,
   initialState,
-  applyMiddleware(...middleware)
+  applyMiddleware(sagaMiddleware)
 );
+sagaMiddleware.run(rootSaga);
 
 export default store;
+

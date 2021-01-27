@@ -5,11 +5,11 @@ import arrowUpGreen from "../assets/greenUpArrow.png";
 import arrowDownRed from "../assets/redArrowDown.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function UnrealizedPL(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
   let arrow;
@@ -133,7 +133,6 @@ function UnrealizedPL(props) {
                       ? data.percentReturn
                       : data.percentReturn.toString().split("-")[1])
                 }
-                %
               </span>
             </div>
             {bar}
@@ -148,8 +147,12 @@ function UnrealizedPL(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(UnrealizedPL);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UnrealizedPL);

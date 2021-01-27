@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import "./css/marketValue.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function MarketValue(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
   if (props.stocks !== undefined) {
@@ -41,8 +41,12 @@ function MarketValue(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(MarketValue);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarketValue);

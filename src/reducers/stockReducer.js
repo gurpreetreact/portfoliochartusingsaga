@@ -1,15 +1,13 @@
-import { FETCH_SUCCESSFUL, FETCH_FAILED } from "../actions/types";
+import { FETCH_SUCCESSFUL } from "../actions/types";
 
-const initialState = {
-  stocksData: [],
-};
+const initialState = { hell: " " };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_SUCCESSFUL:
       return {
         ...state,
-        stocksData: action.payload,
+        stockData: action.stockData,
       };
     default:
       return state;

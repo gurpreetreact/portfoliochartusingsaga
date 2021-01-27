@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./css/donut.css";
 import { connect } from "react-redux";
-import { fetchStocks } from "../actions/postActions";
+import { loadStocks } from "../actions/allActions";
 
 function Donut(props) {
   useEffect(() => {
-    props.fetchStocks();
+    props.loadStocks();
   }, []);
   let stock = [];
   let mutualFund = [],
@@ -30,8 +30,6 @@ function Donut(props) {
   totalOfEtfs = etfs.reduce(function (a, b) {
     return a + b;
   }, 0);
-
-  console.log("Mutual funds", totalOfMutualFunds);
 
   return (
     <div className="overAll">
@@ -112,8 +110,12 @@ function Donut(props) {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocksData,
+    stocks: state.stockData,
   };
 };
 
-export default connect(mapStateToProps, { fetchStocks })(Donut);
+const mapDispatchToProps = (dispatch) => ({
+  loadStocks: () => dispatch(loadStocks()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Donut);

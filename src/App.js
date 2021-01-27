@@ -1,7 +1,5 @@
 import React from "react";
 
-import fetchStocks from "./actions/postActions";
-
 import BuySell from "./userInterface/buySell";
 import Donut from "./userInterface/donut";
 import GeneralQuantity from "./userInterface/generalQuantity";
